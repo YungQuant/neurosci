@@ -24,6 +24,7 @@ def create_binary_eeg_epilepsy_training_dataset(datasets, epilepsy):
 filepaths = ['00000003/s01_2011_11_01/a_.edf']
 datasets = []; data = [];
 path = "../../../../Desktop/tuh_eeg_epilepsy/"
+control_filepaths = []
 
 for i in range(len(filepaths)):
     filepaths[i] = (path + filepaths[i])
@@ -43,7 +44,8 @@ for i in range(len(filepaths)):
 tot_len = 0
 
 scaler = MinMaxScaler(feature_range=(-1, 1))
-X, Y = create_binary_eeg_epilepsy_training_dataset(datasets)
+X, Y = create_binary_eeg_epilepsy_training_dataset(datasets, epilepsy=True)
+X, Y = create_binary_eeg_epilepsy_training_dataset(control_datasets, epilepsy=False)
 
 X = scaler.fit_transform(X)
 #X = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
